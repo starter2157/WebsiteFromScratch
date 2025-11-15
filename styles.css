@@ -286,6 +286,10 @@ body {
         row-gap: 28px;
     }
 
+    .pet-card {
+        grid-template-columns: 145px 1fr;
+    }
+
     .pet-card-text {
         padding: 21px 29px;
     }

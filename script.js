@@ -9,13 +9,32 @@ async function setTemperature() {
 
 setTemperature()
 
+const template = document.querySelector("#pet-card-template")
+const wrapper = document.createDocumentFragment()
+
 async function setPetCard() {
     const petsPromise = await fetch("https://learnwebcode.github.io/bootcamp-pet-data/pets.json")
     const petsData = await petsPromise.json()
 
     petsData.forEach(petData => {
-        console.log(petData.name)
+        const petCard = template.content.cloneNode(true)
+        petCard.querySelector("h3").textContent = petData.name
+        petCard.querySelector(".pet-description").textContent = petData.description
+        petCard.querySelector(".pet-age").textContent = ageCal(petData.birthYear)
+        petCard.querySelector(".pet-card-photo img").src = petData.photo
+        petCard.querySelector(".pet-card-photo img").alt = `A ${petData.species} named ${petData.name}`
+        wrapper.appendChild(petCard)
     })
+
+    document.querySelector(".list-of-pets").appendChild(wrapper)
+}
+
+function ageCal(birthYear) {
+    const currentYear = new Date().getFullYear()
+    const age = currentYear - birthYear
+    if (age == 1) return "1 year old"
+    else if (age < 1) return "Less than a year old"
+    else return `${age} years old`
 }
 
 setPetCard()
