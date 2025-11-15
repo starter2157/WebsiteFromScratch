@@ -186,6 +186,16 @@ body {
     font-weight: 400;
     line-height: 28px;
     color: #9F9F9F;
+    cursor: pointer;
+}
+
+.pet-filter button:hover {
+    color: #7D7D7D;
+}
+
+.pet-filter .active, .pet-filter .active:hover{
+    color: #475AFF;
+    text-decoration: underline;
 }
 
 .site-footer p {

@@ -1,3 +1,5 @@
+// Get Temperature
+
 async function setTemperature() {
     const weatherPromise = await fetch("https://api.weather.gov/gridpoints/MFL/110,50/forecast")
     const weatherData = await weatherPromise.json()
@@ -9,6 +11,8 @@ async function setTemperature() {
 
 setTemperature()
 
+// Pet Card Adder
+
 const template = document.querySelector("#pet-card-template")
 const wrapper = document.createDocumentFragment()
 
@@ -18,6 +22,7 @@ async function setPetCard() {
 
     petsData.forEach(petData => {
         const petCard = template.content.cloneNode(true)
+        petCard.querySelector(".pet-card").dataset.species = petData.species
         petCard.querySelector("h3").textContent = petData.name
         petCard.querySelector(".pet-description").textContent = petData.description
         petCard.querySelector(".pet-age").textContent = ageCal(petData.birthYear)
@@ -39,3 +44,26 @@ function ageCal(birthYear) {
 }
 
 setPetCard()
+
+// Pet Filter Button
+
+const allButtons = document.querySelectorAll(".pet-filter button")
+
+allButtons.forEach(el => {
+    el.addEventListener("click", handleButtonClick)
+})
+
+function handleButtonClick(e) {
+    allButtons.forEach(el => el.classList.remove("active"))
+
+    e.target.classList.add("active")
+
+    const currentFilter = e.target.dataset.filter
+    document.querySelectorAll(".pet-card").forEach(petCard => {
+        if (currentFilter == petCard.dataset.species || currentFilter == "all") {
+            petCard.style.display = "grid"
+        } else {
+            petCard.style.display = "none"
+        }
+    })
+}
