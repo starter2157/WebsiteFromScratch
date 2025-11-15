@@ -21,6 +21,7 @@ async function setPetCard() {
         petCard.querySelector("h3").textContent = petData.name
         petCard.querySelector(".pet-description").textContent = petData.description
         petCard.querySelector(".pet-age").textContent = ageCal(petData.birthYear)
+        if (!petData.photo) petData.photo = "images/Fallback.jpg" 
         petCard.querySelector(".pet-card-photo img").src = petData.photo
         petCard.querySelector(".pet-card-photo img").alt = `A ${petData.species} named ${petData.name}`
         wrapper.appendChild(petCard)
