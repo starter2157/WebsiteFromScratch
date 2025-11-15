@@ -17,7 +17,7 @@ const template = document.querySelector("#pet-card-template")
 const wrapper = document.createDocumentFragment()
 
 async function setPetCard() {
-    const petsPromise = await fetch("https://learnwebcode.github.io/bootcamp-pet-data/pets.json")
+    const petsPromise = await fetch("https://netlifypetadoption.netlify.app/.netlify/functions/pets")
     const petsData = await petsPromise.json()
 
     petsData.forEach(petData => {
